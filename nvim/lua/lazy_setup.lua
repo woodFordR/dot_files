@@ -11,13 +11,19 @@ require("lazy").setup({
       update_notifications = true, -- Enable/disable notification about running `:Lazy update` twice to update pinned plugins
     },
   },
+  {
+    "akinsho/bufferline.nvim",
+    lazy = false,
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function() require("bufferline").setup {} end,
+  },
   { "nvim-treesitter/nvim-treesitter", branch = "master", lazy = false, build = ":TSUpdate" },
   { import = "community" },
   { import = "plugins" },
 } --[[@as LazySpec]], {
   -- Configure any other `lazy.nvim` configuration options here
   install = { colorscheme = { "deus", "icons", "astrotheme", "habamax" } },
-  ft = {"quarto", "markdown"},
+  ft = { "quarto", "markdown" },
   ui = { backdrop = 100 },
   performance = {
     rtp = {

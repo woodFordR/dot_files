@@ -9,10 +9,10 @@ return {
             enable = true,
             set_jumps = false,
             goto_next_start = {
-              ["]b"] = { query = "@code_cell.inner", desc = "next code block" },
+              ["]c"] = { query = "@code_cell.inner", desc = "next code block" },
             },
             goto_previous_start = {
-              ["[b"] = { query = "@code_cell.inner", desc = "previous code block" },
+              ["[c"] = { query = "@code_cell.inner", desc = "previous code block" },
             },
           },
           select = {
