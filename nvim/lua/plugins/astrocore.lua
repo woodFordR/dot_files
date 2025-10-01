@@ -65,6 +65,11 @@ return {
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
       },
+      v = {
+        -- Stay in visual mode when indenting
+        ["<"] = { "<gv", desc = "Unindent line" },
+        [">"] = { ">gv", desc = "Indent line" },
+      },
     },
   },
 }
