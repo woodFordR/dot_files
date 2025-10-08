@@ -119,15 +119,26 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   end,
 })
 
-require("lspconfig")["pyright"].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    python = {
-      analysis = {
-        diagnosticSeverityOverrides = {
-          reportUnusedExpression = "none",
-        },
+-- require("lspconfig")["pyright"].setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   settings = {
+--     python = {
+--       analysis = {
+--         diagnosticSeverityOverrides = {
+--           reportUnusedExpression = "none",
+--         },
+--       },
+--     },
+--   },
+-- }
+
+require("lspconfig")["ruff"].setup {
+  init_options = {
+    settings = {
+      lineLength = 80,
+      lint = {
+        extendIgnore = { "F401", "F404" },
       },
     },
   },

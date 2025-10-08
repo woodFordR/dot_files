@@ -1,6 +1,6 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.pack.python" },
+  -- Removed astrocommunity.pack.python to avoid duplicate linters
   -- import/override with your plugins folder
 }
