@@ -14,7 +14,8 @@ ZSH_THEME="random"
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-ZSH_THEME_RANDOM_CANDIDATES=( "philips" "kolo" "garyblessington" "takashiyoshida" "awesomepanda" "theunraveler" )
+ZSH_THEME_RANDOM_CANDIDATES=( "kolo" "awesomepanda" "theunraveler" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "philips" "kolo" "garyblessington" "takashiyoshida" "awesomepanda" "theunraveler" )
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -132,7 +133,7 @@ alias claude="/Users/adam/.claude/local/claude"
 # export PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 # export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
-export AWS_PROFILE="woodfords_dev"
+export AWS_PROFILE="woodfords_den_root"
 export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH=$HOME/.local/bin:/usr/local/bin:$HOME/bin:$PATH

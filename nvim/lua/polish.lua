@@ -22,4 +22,4 @@
 -- vim.cmd [[colorscheme juliana]]
 -- vim.cmd [[colorscheme onenord]]
 -- vim.cmd [[colorscheme base16-still-alive]]
--- vim.cmd [[colorscheme deus]]
+vim.cmd [[colorscheme base16-seti]]
