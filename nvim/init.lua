@@ -140,6 +140,7 @@ require("lspconfig")["ruff"].setup {
       lint = {
         extendIgnore = { "F401", "F404" },
       },
+      organizeImports = true,
     },
   },
 }
