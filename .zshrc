@@ -75,7 +75,6 @@ ZSH_THEME_RANDOM_CANDIDATES=( "kolo" "awesomepanda" "theunraveler" )
 plugins=(
   git
   bundler
-  dotenv
   emotty
   macos
   rails
