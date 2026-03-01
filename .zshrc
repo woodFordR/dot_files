@@ -1,8 +1,19 @@
 # @woodFordR .zshrc
 
+# oh-my-zsh; https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+#------------------------------------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+#------------------------------------------------------------------------------
 
-# zshrc https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #------------------------------------------------------------------------------
 ZSH_THEME="random"
 ZSH_THEME_RANDOM_CANDIDATES=( "kolo" "awesomepanda" "theunraveler" "sorin" )
@@ -41,22 +52,9 @@ plugins=(
 )
 #------------------------------------------------------------------------------
 
-# oh-my-zsh
-#------------------------------------------------------------------------------
-source $ZSH/oh-my-zsh.sh
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-#------------------------------------------------------------------------------
-
 # cpython package manager
 #------------------------------------------------------------------------------
-# eval "$(uv generate-shell-completion zsh)"
+eval "$(uv generate-shell-completion zsh)"
 # export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
 # export PYTHONPATH="${PYTHONPATH}:/Users/adam/woodfords-dev/python_stuff/bourbon"
 #------------------------------------------------------------------------------
@@ -90,7 +88,6 @@ alias zshconfig="nvim ~/.zshrc"
 # export EDITOR="nano --wait"
 # export PATH=$PATH:$HOME/.pulumi/bin
 # export PATH=$PATH:$HOME/.claude/local/
-export LANG=en_US.UTF-8
 export AWS_PROFILE="woodfords_den_root"
 export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/bin:$PATH"
 export VISUAL="nvim"
@@ -99,6 +96,13 @@ export VENV_HOME="$HOME/.virtualenvs"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
+#------------------------------------------------------------------------------
+
+# set locale
+#------------------------------------------------------------------------------
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 #------------------------------------------------------------------------------
 
 # nvim
