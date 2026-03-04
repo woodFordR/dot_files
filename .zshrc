@@ -1,11 +1,27 @@
 # @woodFordR .zshrc
+fpath=(/usr/share/zsh/functions/Zle $fpath)
 
 # oh-my-zsh; https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #------------------------------------------------------------------------------
-ZSH_THEME="random"
-ZSH_THEME_RANDOM_CANDIDATES=( "kolo" "awesomepanda" "theunraveler" "sorin" )
+# ZSH_THEME="random"
+# ZSH_THEME_RANDOM_CANDIDATES=( "kolo" "awesomepanda" "theunraveler" "sorin" )
 
 export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""  # empty = let Starship handle prompt
+DISABLE_MAGIC_FUNCTIONS=true
+#------------------------------------------------------------------------------
+plugins=(
+  git
+  bundler
+  emotty
+  poetry
+  podman
+  rails
+  rake
+  rbenv
+  ruby
+)
+#------------------------------------------------------------------------------
 source $ZSH/oh-my-zsh.sh
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -36,21 +52,7 @@ source $ZSH/oh-my-zsh.sh
 #------------------------------------------------------------------------------
 
 # plugins standard at $ZSH/plugins/ custom at $ZSH_CUSTOM/plugins/
-#------------------------------------------------------------------------------
-plugins=(
-  git
-  bundler
-  emotty
-  macos
-  poetry
-  podman
-  rails
-  rake
-  rbenv
-  ruby
-  zsh-autosuggestions
-)
-#------------------------------------------------------------------------------
+
 
 # aliases
 #------------------------------------------------------------------------------
@@ -68,6 +70,9 @@ alias python="/usr/bin/python3"
 alias zshconfig="nvim ~/.zshrc"
 #------------------------------------------------------------------------------
 
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
 # exports, tmux tokyo night deps
 #------------------------------------------------------------------------------
 # export PATH="/opt/homebrew/opt/bc/bin:$PATH"
@@ -80,6 +85,7 @@ alias zshconfig="nvim ~/.zshrc"
 # export VISUAL="nano --wait"
 # export EDITOR="nano --wait"
 # export PATH=$PATH:$HOME/.pulumi/bin
+export LANG=en_US.UTF-8
 export PATH=$PATH:$HOME/.claude/local/
 export AWS_PROFILE="woodfords_den_root"
 export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/bin:$PATH"
@@ -89,20 +95,11 @@ export VENV_HOME="$HOME/.virtualenvs"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export STARSHIP_CONFIG=~/.config/starship.toml
-#------------------------------------------------------------------------------
-
-# cpython package manager
-#------------------------------------------------------------------------------
-eval "$(uv generate-shell-completion zsh)"
 # export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
 # export PYTHONPATH="${PYTHONPATH}:/Users/adam/woodfords-dev/python_stuff/bourbon"
 #------------------------------------------------------------------------------
 
-# set locale
 #------------------------------------------------------------------------------
-export LANG=en_US.UTF-8
-# export LC_ALL=en_US.UTF-8
-# export LC_CTYPE=en_US.UTF-8
 #------------------------------------------------------------------------------
 
 # nvim
@@ -111,36 +108,36 @@ export NVM_COLORS='cmgRY'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
 # bash, zsh completion; clipboard; powerline, terraform
 #------------------------------------------------------------------------------
-fpath+=~/.zfunc
+FPATH+=~/.zfunc
+FPATH=~/.rbenv/completions:"$FPATH"
+
+eval "$(~/.rbenv/bin/rbenv init - zsh)"
+eval "$(starship init zsh)"
+eval "$(uv generate-shell-completion zsh)"
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 set clipboard+=xclip
-. "$HOME/.local/share/pipx/venvs/powerline-status/lib/python3.12/site-packages/powerline/bindings/zsh/powerline.zsh"
+. "$HOME/.config/wezterm.sh"
+# . "$HOME/.local/share/pipx/venvs/powerline-status/lib/python3.12/site-packages/powerline/bindings/zsh/powerline.zsh"
+
+# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # ZSH_TMUX_AUTOSTART=true
 # (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
 # ZSH_HIGHLIGHT_STYLES[path]=none
 # ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-#------------------------------------------------------------------------------
 
-# rbenv
 #------------------------------------------------------------------------------
-# eval "$(rbenv init - zsh)"
-eval "$(~/.rbenv/bin/rbenv init - zsh)"
-FPATH=~/.rbenv/completions:"$FPATH"
 #------------------------------------------------------------------------------
 
 # virtual envs
 #------------------------------------------------------------------------------
-# mkvenv ""   # creates ~/.virtualenvs/
-# venv ""     # activates
-# deactivate  # deactivates
-# rmvenv ""   # removes venv
-
 [[ -d $VENV_HOME ]] || mkdir $VENV_HOME
 lsvenv() {
   ls -1 $VENV_HOME
@@ -169,9 +166,22 @@ rmvenv() {
       rm -r $VENV_HOME/$1
   fi
 }
+
+#------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-source /etc/profile.d/wezterm.sh
-eval "$(starship init zsh)"
-# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# wezterm shell integration
+#------------------------------------------------------------------------------
+[ -n "$WEZTERM_PANE" ] && export NVIM_LISTEN_ADDRESS="/tmp/nvim$WEZTERM_PANE"
+
+ZSH_AUTOSUGGEST_IGNORE_WIDGETS=(url-quote-magic)
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+autoload -Uz url-quote-magic
+zle -N url-quote-magic
+
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
+
+test
+test

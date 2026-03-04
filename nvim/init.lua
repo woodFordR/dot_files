@@ -1,15 +1,49 @@
 -- This file simply bootstraps the installation of Lazy.nvim and then calls other files for execution
 -- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
-vim.g.python3_host_prog = vim.fn.expand "~/.virtualenvs/neovim/bin/python3"
 
+-------------------------------------------------------------------------------
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   -- stylua: ignore
   vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
+
 vim.opt.rtp:prepend(lazypath)
 vim.opt.rtp:prepend(os.getenv "HOME" .. "/.config/nvim/lua/plugins")
 
+-- validate that lazy is available
+if not pcall(require, "lazy") then
+  -- stylua: ignore
+  vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+  vim.fn.getchar()
+  vim.cmd.quit()
+end
+
+require "lazy_setup"
+require "polish"
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+vim.g.python3_host_prog = vim.fn.expand "~/.virtualenvs/neovim/bin/python3"
+vim.g.tmux_resizer_no_mappings = 1
+
+vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { silent = true })
+vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { silent = true })
+vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { silent = true })
+vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { silent = true })
+
+vim.keymap.set("t", "<C-h>", "<C-\\><C-N><cmd>TmuxNavigateLeft<cr>")
+vim.keymap.set("t", "<C-j>", "<C-\\><C-N><cmd>TmuxNavigateDown<cr>")
+vim.keymap.set("t", "<C-k>", "<C-\\><C-N><cmd>TmuxNavigateUp<cr>")
+vim.keymap.set("t", "<C-l>", "<C-\\><C-N><cmd>TmuxNavigateRight<cr>")
+
+vim.keymap.set("n", "<M-h>", "<cmd>TmuxResizeLeft<cr>", { silent = true })
+vim.keymap.set("n", "<M-j>", "<cmd>TmuxResizeDown<cr>", { silent = true })
+vim.keymap.set("n", "<M-k>", "<cmd>TmuxResizeUp<cr>", { silent = true })
+vim.keymap.set("n", "<M-l>", "<cmd>TmuxResizeRight<cr>", { silent = true })
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
 -- require("molten.status").initialized() -- "Molten" or "" based on initialization information
 -- require("molten.status").kernels() -- "kernel1 kernel2" list of kernels attached to buffer or ""
 --- I find auto open annoying, keep in mind setting this option will require setting
@@ -29,17 +63,7 @@ vim.g.molten_virt_text_output = true
 
 -- this will make it so the output shows up below the \`\`\` cell delimiter
 -- vim.g.molten_virt_lines_off_by_1 = true - require("molten-nvim").all_kernels() -- same as kernels, but will show all kernels
-
--- validate that lazy is available
-if not pcall(require, "lazy") then
-  -- stylua: ignore
-  vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
-  vim.fn.getchar()
-  vim.cmd.quit()
-end
-
-require "lazy_setup"
-require "polish"
+-------------------------------------------------------------------------------
 
 local quarto = require "quarto"
 quarto.setup {
